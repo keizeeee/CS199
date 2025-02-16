@@ -13,3 +13,9 @@ Install dependencies:
    ```sh
    npm install
    ```
+### Running Angular Frontend
+Start the Angular development server:
+   ```sh
+   ng serve --open
+   ```
+   - This runs Angular on `http://localhost:4200`
