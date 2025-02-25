@@ -12,11 +12,15 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void{
     this.configMap()
+    this.loadGeoJSON("assets/AggregateBandwidth.geojson");
   }
 
   // must define map variable
-  map : any
+  private map!: L.Map;
 
+  private geoJsonLayer!: L.GeoJSON; // Store the GeoJSON layer
+
+  // LOAD THE MAP
   configMap(){
     this.map = L.map('map',{
       center: [12.8797, 121.7740], // Philippines
@@ -28,6 +32,24 @@ export class DashboardComponent implements OnInit{
     }).addTo(this.map);
 
 
+  }
+
+  private loadGeoJSON(filePath: string): void {
+    fetch(filePath)
+      .then(response => response.json())
+      .then(data => {
+        this.geoJsonLayer = L.geoJSON(data, {
+          style: { color: "red", weight: 2 }, // Customize layer style
+          onEachFeature: (feature, layer) => {
+            if (feature.properties) {
+              layer.bindPopup(`<b>Road</b><br>${JSON.stringify(feature.properties)}`);
+            }
+          }
+        });
+
+        this.geoJsonLayer.addTo(this.map);
+      })
+      .catch(error => console.error("Error loading GeoJSON:", error));
   }
   
 }
