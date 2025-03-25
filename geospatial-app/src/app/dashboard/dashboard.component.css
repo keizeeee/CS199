@@ -1,18 +1,23 @@
 .map-container {
   position: absolute;
-  top: 0;
+  top: 10;
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 100px;
+  
 }
 
 .map-frame {
-  border: 2px solid black;
-  height: 80%;
-  width: 90%;
+  border: 2px solid gray;
+  height: 92%;
+  width: 100%;
 }
 
 #map {
   height: 100%;
+}
+
+.font-mon {
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 700; 
 }
